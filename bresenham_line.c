@@ -3,78 +3,68 @@
 void main()
 {
 int dx,dy,min,max;
-int i,j,e,x2,x1,y1,y2;
+int x,i,j,z,e,x2,x1,y1,y2;
 int gdriver=DETECT,gmode,gerror;
 printf("Enter two points (x,y):");
 scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
 initgraph(&gdriver,&gmode,"c:\\tc\\bgi:");
 dx= x2-x1;
 dy = y2-y1;
-if(dx!=0)
+if(x1>x2)
 {
-if(dx<0)
-  {
+  max=x1;
+  min=x2;
   dx = -dx;
   dy = -dy;
   j = y2;
-  }
-else
-j = y1;
-e = dy-dx;
-if(x1<x2)
-  { min=x1;
-    max = x2;
-  }
-else
- {
-   min = x2;
-   max = x1;
- }
-for(i = min;i<=max-1;)
- {
-  putpixel(i,j,4);
-  if(e>=0)
-    {
-    j = j+1;
-   e = e -dx;
-   }
-  i = i+1;
-   e= e+ dy;
- }
+  z = y1;
+  putpixel(x2,y2,4);
 }
-
 else
 {
-if(dy<0)
-  {
-  dy = -dy;
-  j = y2;
-  }
-else
+max = x2;
+min = x1;
 j = y1;
-e = dy-dx;
-if(y1<y2)
-  { min=y1;
-    max = y2;
-  }
-else
- {
-   min = y2;
-   max = y1;
- }
-for(i = min;i<=max-1;)
- {
-  putpixel(x1,j,4);
-  if(e>=0)
+z = y2;
+putpixel(x1,y1,4);
+}
+x = min;
+e = 2*dy - dx;
+if(min!=max)
+{
+for(i=min;x<=max;)
+{
+  if(e<0)
+     {
+      putpixel(x+1,j,4);
+     }
+  else
     {
+    putpixel(x+1,j+1,4);
     j = j+1;
-   e = e -dx;
    }
-  i = i+1;
-   e= e+ dy;
- }
-
+   e = e + 2 *dy - 2*dx;   
+      x = x +1;
+    i = 4 *dx -4;
+}
+}
+else
+{
+for(i=j;j<=z;)
+{
+  if(e<0)
+     {
+      putpixel(x,j,4);
+     }
+  else
+    {
+    putpixel(x,j+1,4);
+    j = j+1;
+   }
+   e = e + 2 *dy - 2*dx;   
+} 
 }
 getch();
 
 }
+
